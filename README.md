@@ -1,10 +1,11 @@
 # OpenVPN for Docker
+Forked from jpetazzo/dockvpn.
 
 Quick instructions:
 
 ```bash
-CID=$(docker run -d --privileged -p 1194:1194/udp -p 443:443/tcp jpetazzo/dockvpn)
-docker run -t -i -p 8080:8080 --volumes-from $CID jpetazzo/dockvpn serveconfig
+CID=$(docker run -d --privileged -p 1194:1194/udp mikedoughery/dockvpn)
+docker run -t -i -p 8080:8080 --volumes-from $CID mikedougherty/dockvpn serveconfig
 ```
 
 Now download the file located at the indicated URL. You will get a
@@ -43,8 +44,7 @@ When the `jpetazzo/dockvpn` image is started, it generates:
 - two OpenVPN server configurations (for UDP and TCP),
 - an OpenVPN client profile.
 
-Then, it starts two OpenVPN server processes (one on 1194/udp, another
-on 443/tcp).
+Then, it starts an OpenVPN server processes on 1194/udp.
 
 The configuration is located in `/etc/openvpn`, and the Dockerfile
 declares that directory as a volume. It means that you can start another
